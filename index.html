@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #000000;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -263,7 +263,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>let's hang man</h1>
+        <h1>🎭 Hangman</h1>
         <p class="subtitle">Guess the word before the hangman is complete</p>
 
         <div class="game-wrapper">
@@ -348,32 +348,20 @@
             ctx.lineTo(200, 70);
             ctx.stroke();
 
-            // Black top hat (always drawn)
-            ctx.fillStyle = '#000000';
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = '#333';
-            // Hat brim
+            // Hat (always drawn)
+            ctx.fillStyle = '#FF6B6B';
             ctx.beginPath();
-            ctx.ellipse(200, 65, 35, 8, 0, 0, Math.PI * 2);
+            ctx.moveTo(170, 60);
+            ctx.lineTo(230, 60);
+            ctx.lineTo(225, 45);
+            ctx.lineTo(175, 45);
+            ctx.closePath();
             ctx.fill();
-            ctx.stroke();
-            // Hat sides
+            // Hat top
+            ctx.fillStyle = '#FF5252';
             ctx.beginPath();
-            ctx.moveTo(165, 65);
-            ctx.lineTo(170, 40);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(235, 65);
-            ctx.lineTo(230, 40);
-            ctx.stroke();
-            // Hat crown
-            ctx.beginPath();
-            ctx.ellipse(200, 40, 30, 25, 0, 0, Math.PI * 2);
+            ctx.ellipse(200, 45, 30, 12, 0, 0, Math.PI * 2);
             ctx.fill();
-            ctx.stroke();
-            // Hat band
-            ctx.fillStyle = '#FFD700';
-            ctx.fillRect(165, 60, 70, 4);
 
             // Face (always drawn)
             ctx.strokeStyle = '#333';
@@ -385,41 +373,20 @@
             ctx.stroke();
 
             // Eyes (always drawn)
-            // Left eye
             ctx.fillStyle = '#333';
             ctx.beginPath();
             ctx.arc(190, 92, 4, 0, Math.PI * 2);
             ctx.fill();
-            // Right eye with monocle
-            ctx.fillStyle = '#FFD9B3';
             ctx.beginPath();
-            ctx.arc(215, 92, 8, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            // Monocle glass
-            ctx.fillStyle = 'rgba(173, 216, 230, 0.3)';
-            ctx.beginPath();
-            ctx.arc(215, 92, 8, 0, Math.PI * 2);
-            ctx.fill();
-            // Eye behind monocle
-            ctx.fillStyle = '#333';
-            ctx.beginPath();
-            ctx.arc(215, 92, 3, 0, Math.PI * 2);
+            ctx.arc(210, 92, 4, 0, Math.PI * 2);
             ctx.fill();
 
-            // Mouth (always drawn) - smiling with tongue out
+            // Mouth (always drawn)
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.arc(200, 105, 8, 0, Math.PI, false);
             ctx.stroke();
-            // Tongue sticking out
-            ctx.fillStyle = '#FF69B4';
-            ctx.beginPath();
-            ctx.ellipse(200, 118, 5, 7, 0, 0, Math.PI * 2);
-            ctx.fill();
 
             // Body - appears on 1st wrong guess
             if (wrongCount >= 1) {
@@ -549,12 +516,12 @@
             const messageEl = document.getElementById('message');
 
             if (wordComplete) {
-                messageEl.textContent = 'You Won!';
+                messageEl.textContent = '🎉 You Won!';
                 messageEl.className = 'message win';
                 gameOver = true;
                 disableAllButtons();
             } else if (isLose) {
-                messageEl.textContent = `Game Over! Word: ${selectedWord}`;
+                messageEl.textContent = `😔 Game Over! Word: ${selectedWord}`;
                 messageEl.className = 'message lose';
                 gameOver = true;
                 disableAllButtons();
